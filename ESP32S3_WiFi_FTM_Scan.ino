@@ -4,19 +4,22 @@
 #include "esp_log.h"
 #include "nvs_flash.h"
 
-#define INTERVAL 10
+#define INTERVAL 10 //scan interval in seconds
 
 
+//event handler for ESP32
 static esp_err_t event_handler(void * ctx, system_event_t *event) {
   return ESP_OK;
 }
 
+//auth mode 
 static char *auth_mode_type(wifi_auth_mode_t auth_mode)
 {
   char *types[] = {"OPEN", "WEP", "WPA PSK", "WPA2 PSK", "WPA WPA2 PSK", "MAX"};
   return types[auth_mode];
 }
 
+//initializa wifi
 void wifiInit() {
   ESP_ERROR_CHECK(nvs_flash_init());
   tcpip_adapter_init();
@@ -35,6 +38,7 @@ void setup() {
   Serial.println("ESP32S3 initialization done");
 }
 
+//wifi scan function
 void wifi_perform_scan(){
   wifi_scan_config_t scan_config = { 0 };
   uint8_t i;
@@ -45,15 +49,13 @@ void wifi_perform_scan(){
   esp_wifi_scan_get_ap_num(&g_scan_ap_num);
   if (g_scan_ap_num == 0) {
       Serial.println("No matching AP found");
-      //return false;
   }
   
   wifi_ap_record_t g_ap_list_buffer[g_scan_ap_num];
   memset(g_ap_list_buffer, 0, sizeof(g_ap_list_buffer));
   
   if (g_ap_list_buffer == NULL) {
-      Serial.println("Failed to malloc buffer to print scan results");
-      //return false;
+      Serial.println("Failed to alloc buffer to print scan results");
   }
     
   if (esp_wifi_scan_get_ap_records(&g_scan_ap_num, g_ap_list_buffer) == ESP_OK) {
@@ -67,7 +69,6 @@ void wifi_perform_scan(){
   }  
 
   Serial.println("WiFi scan done");
-  //return true;
 }
 
 void loop() {
