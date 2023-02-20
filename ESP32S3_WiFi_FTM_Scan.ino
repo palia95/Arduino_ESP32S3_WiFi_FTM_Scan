@@ -62,7 +62,7 @@ void wifi_perform_scan(){
     Serial.println("              SSID             | Channel | RSSI |     Auth     | FTM |         MAC        ");
     Serial.println("******************************************************************************************");
     for (i = 0; i < g_scan_ap_num; i++) {
-        printf("%30s | %7d | %4d | %12s | %3d | %X:%X:%X:%X:%X:%X \n", (char *)g_ap_list_buffer[i].ssid, g_ap_list_buffer[i].primary, g_ap_list_buffer[i].rssi, auth_mode_type(g_ap_list_buffer[i].authmode), g_ap_list_buffer[i].ftm_responder, g_ap_list_buffer[i].bssid[0], g_ap_list_buffer[i].bssid[1], g_ap_list_buffer[i].bssid[2], g_ap_list_buffer[i].bssid[3], g_ap_list_buffer[i].bssid[4], g_ap_list_buffer[i].bssid[5]);
+        printf("%30s | %7d | %4d | %12s | %3d | %02X:%02X:%02X:%02X:%02X:%02X \n", (char *)g_ap_list_buffer[i].ssid, g_ap_list_buffer[i].primary, g_ap_list_buffer[i].rssi, auth_mode_type(g_ap_list_buffer[i].authmode), g_ap_list_buffer[i].ftm_responder, g_ap_list_buffer[i].bssid[0], g_ap_list_buffer[i].bssid[1], g_ap_list_buffer[i].bssid[2], g_ap_list_buffer[i].bssid[3], g_ap_list_buffer[i].bssid[4], g_ap_list_buffer[i].bssid[5]);
 
     }
     Serial.println("*******************************************************************************************");
